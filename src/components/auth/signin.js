@@ -8,7 +8,9 @@ class Signin extends Component {
     }
 
     handleFormSubmit = (formProps) => {
-        this.props.signinUser(formProps.email,formProps.password);
+        this.props.signinUser(formProps.email,formProps.password,() => {
+            this.props.history.push('/feature');
+        });
     };
 
     render(){
