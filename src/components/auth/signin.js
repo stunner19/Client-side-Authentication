@@ -1,6 +1,5 @@
 import React, { Component } from 'react';
 import { reduxForm, Field } from 'redux-form';
-import * as actions from '../../actions';
 
 class Signin extends Component {
     constructor(props){
@@ -12,6 +11,16 @@ class Signin extends Component {
             this.props.history.push('/feature');
         });
     };
+
+    renderAlert = () => {
+        if(this.props.errorMessage){
+            return(
+                <div className = "alert alert-danger">
+                    <strong>Oops!</strong> {this.props.errorMessage}
+                </div>
+            );
+        }
+    }
 
     render(){
         const { handleSubmit } = this.props;
@@ -25,6 +34,7 @@ class Signin extends Component {
                     <label>Password:</label>
                     <Field name = "password" type = "password" component = "input" autoComplete = "none" className = "form-control" />
                 </fieldset>
+                {this.renderAlert()}
                 <button action = "submit" className = "btn btn-primary">Sign In</button>
             </form>
         );  
