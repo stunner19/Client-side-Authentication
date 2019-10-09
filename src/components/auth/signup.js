@@ -1,13 +1,21 @@
 import React, { Component } from 'react';
 import { reduxForm, Field } from 'redux-form';
 
-class Signin extends Component {
+function validate(formProps){
+    const errors = {};
+    if(formProps.password != formProps.passwordConfirm){
+        errors.password = 'Passwords must match!!'
+    }
+    return errors;
+}
+
+class Signup extends Component {
     constructor(props){
         super(props);
     }
 
     handleFormSubmit = (formProps) => {
-        this.props.signinUser(formProps.email,formProps.password,() => {
+        this.props.signupUser(formProps.email,formProps.password,() => {
             this.props.history.push('/feature');
         });
     };
@@ -34,11 +42,17 @@ class Signin extends Component {
                     <label>Password:</label>
                     <Field name = "password" type = "password" component = "input" autoComplete = "none" className = "form-control" />
                 </fieldset>
+                <fieldset className = "form-group">
+                    <label>Confirm Password:</label>
+                    <Field name = "passwordConfirm" type = "password" component = "input" autoComplete = "none" className = "form-control" />
+                </fieldset>
                 {this.renderAlert()}
-                <button action = "submit" className = "btn btn-primary">Sign In</button>
+                <button action = "submit" className = "btn btn-primary">Sign Up</button>
             </form>
         );  
     }
 }
 
-export default reduxForm({form : 'signin',})(Signin);
+export default reduxForm({form : 'signup',
+    validate : validate
+})(Signup);
