@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { Switch, Route,withRouter } from 'react-router-dom';
 import Header from './header';
 import Signin from './auth/signin';
-import { signinUser, signoutUser, signupUser } from '../actions/index';
+import { signinUser, signoutUser, signupUser, fetchMessages } from '../actions/index';
 import { connect } from 'react-redux';
 import Extra from './extra';
 import SignOut from './auth/signout';
@@ -20,7 +20,8 @@ const mapStateToProps = (state) => {
 const mapDispatchToProps = (dispatch) => ({
   signinUser: (email,password,callback ) => dispatch(signinUser(email,password,callback)),
   signoutUser: () => dispatch(signoutUser()),
-  signupUser: (email,password,callback ) => dispatch(signupUser(email,password,callback))
+  signupUser: (email,password,callback ) => dispatch(signupUser(email,password,callback)),
+  fetchMessages: () => dispatch(fetchMessages())
 });
 
 class App extends Component {

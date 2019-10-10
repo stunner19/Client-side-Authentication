@@ -52,3 +52,10 @@ export const signupUser = (email, password, callback) => (dispatch) => {
         dispatch(authenticationError('Bad Credentials'));
     });
 };
+
+export const fetchMessages = () => (dispatch) => {
+    axios.get(base_url,{
+        headers : { authorization : localStorage.getItem('token') }
+    })
+    .then((response) => console.log(response));
+}
